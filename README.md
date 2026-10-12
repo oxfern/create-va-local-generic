@@ -12,7 +12,7 @@ cd create-va-local-generic
 ./start.sh
 ```
 
-The first run downloads Bun, Node, llama.cpp, and about **2.9 GB** of model files. They are installed inside this folder; you do not need Hermit, Homebrew, or a global Node install. Allow extra disk space for dependencies and temporary downloads. Later runs use the files already on your computer. Keep the terminal open while using the app. The installer uses `curl`, `tar`, and `unzip` from your system.
+The first run downloads Bun, llama.cpp, and about **2.9 GB** of model files. They are installed inside this folder; you do not need Hermit, Homebrew, or Node. Allow extra disk space for dependencies and temporary downloads. Later runs use the files already on your computer. Keep the terminal open while using the app. The installer uses `curl`, `tar`, and `unzip` from your system.
 
 Open **http://127.0.0.1:3000** in your browser and allow microphone access. Click **Connect microphone**, then hold **Space** or **Hold to talk** while speaking. Release to send. The first reply may take longer while speech models load. Use headphones if you enable hands-free interruption.
 
@@ -33,7 +33,7 @@ For microphone errors, use the localhost address above and check your browser's 
 
 ## For contributors
 
-The app uses Bun for its server and browser build, Node for the speech worker, and llama.cpp for local language model inference. `scripts/install-tools.sh` downloads pinned releases and verifies their SHA-256 checksums. `models.lock.json` pins the model revisions and checksums. Downloaded tools and models are ignored by Git.
+The app uses Bun for its server, browser build, and separate speech worker, plus llama.cpp for local language model inference. `scripts/install-tools.sh` downloads pinned releases and verifies their SHA-256 checksums. `models.lock.json` pins the model revisions and checksums. Downloaded tools and models are ignored by Git.
 
 ```sh
 export PATH="$PWD/.tools/bin:$PATH"

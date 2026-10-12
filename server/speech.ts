@@ -17,7 +17,7 @@ export class SpeechProcess implements Speech {
  #start() {
   if (this.#stopped) throw new Error("Speech runtime closed");
   if (this.#child) return this.#child;
-  const child = Bun.spawn([this.config.nodeBinary, this.config.workerPath, this.config.whisperPath, this.config.kokoroPath, this.config.voice || "af_heart"], { stdin: "pipe", stdout: "pipe", stderr: "inherit" });
+  const child = Bun.spawn([process.execPath, this.config.workerPath, this.config.whisperPath, this.config.kokoroPath, this.config.voice || "af_heart"], { stdin: "pipe", stdout: "pipe", stderr: "inherit" });
   this.#child = child;
   void this.#read(child);
   void child.exited.then(code => this.#fail(child, new Error(`Speech worker exited (${code}); retry to restart`)));

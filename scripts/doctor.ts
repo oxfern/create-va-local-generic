@@ -7,7 +7,6 @@ const root = process.cwd();
 const config = await loadConfig(root);
 let failed = false;
 for (const [label, binary, argument] of [
-  ["Node speech runtime", config.speech.nodeBinary, "--version"],
   ["Bun application runtime", "./.tools/bin/bun", "--version"],
 ] as const) {
   try {
@@ -33,7 +32,7 @@ if (missing.length) {
 } else console.log("Models: checksums verified; speech and conversation can run offline.");
 if (!await Bun.file(config.speech.workerPath).exists()) {
   failed = true;
-  console.error("Speech worker: missing. Run bun run build.");
+  console.error("Speech worker: missing. Restore server/speech-worker.ts from the repository.");
 }
 console.log(`Browser: http://127.0.0.1:${config.server.port}; microphone permission is requested when you connect.`);
 console.log("Speech engines: CPU. LLM: configured GPU layers " + config.llama.gpuLayers + ".");

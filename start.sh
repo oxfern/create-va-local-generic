@@ -3,7 +3,7 @@ set -eo pipefail
 
 cd "$(dirname "$0")"
 
-echo "Installing the local tools..."
+echo "Installing Bun and llama.cpp..."
 ./scripts/install-tools.sh
 export PATH="$PWD/.tools/bin:$PATH"
 

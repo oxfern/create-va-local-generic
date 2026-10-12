@@ -12,8 +12,8 @@ case "$(uname -s)" in
   *) echo "Supported systems: macOS and Linux." >&2; exit 1 ;;
 esac
 case "$(uname -m)" in
-  arm64|aarch64) bun_arch=aarch64; node_arch=arm64; llama_arch=arm64 ;;
-  x86_64|amd64) bun_arch=x64; node_arch=x64; llama_arch=x64 ;;
+  arm64|aarch64) bun_arch=aarch64; llama_arch=arm64 ;;
+  x86_64|amd64) bun_arch=x64; llama_arch=x64 ;;
   *) echo "Supported CPUs: ARM64 and x86-64." >&2; exit 1 ;;
 esac
 
@@ -29,12 +29,6 @@ case "$os/$bun_arch" in
   darwin/x64) bun_sha=1d0211b8f1dc991182344687ad15e72ee86f154845a5f7fa477994cd341dd9b0 ;;
   linux/aarch64) bun_sha=4b1a332ee861983eb93bcfe6f770fff94e3e31b2c388bdaea3c8ed35e58eed0e ;;
   linux/x64) bun_sha=2d03fb5fb83ac8b567aca0a281b2ce1a1a19d488f56c2968d88c3f25e92fe452 ;;
-esac
-case "$os/$node_arch" in
-  darwin/arm64) node_sha=23b25245dcfb9af7262f8ff142e9e2e0af025368117329e7a7458a51e5922f53 ;;
-  darwin/x64) node_sha=8a677b0219178efd6eb0e475457c4afb452b521a92f6e67845a73bd85727f2a8 ;;
-  linux/arm64) node_sha=5ced2d48d1d7198739b7f86804de0171aefb6823b684b12341d3321afc3cb0b2 ;;
-  linux/x64) node_sha=1084aa36196bba4c3a5e69a1ee388a6e4ff729dad09445fbcd434b28fe3c24af ;;
 esac
 case "$os/$llama_arch" in
   darwin/arm64) llama_sha=1ad3f9eff80edb9dbef4259ad564d1720612ef7eea48fa4afed0e54f5f3d5711 ;;
@@ -77,15 +71,6 @@ if [ ! -x "$tools_dir/bin/bun" ]; then
   chmod +x "$tools_dir/bin/bun"
 fi
 
-if [ ! -x "$tools_dir/bin/node" ]; then
-  node_name="node-v22.23.3-$os-$node_arch"
-  node_archive="$downloads_dir/$node_name.tar.gz"
-  download_verified "https://nodejs.org/dist/v22.23.3/$node_name.tar.gz" "$node_archive" "$node_sha"
-  mkdir -p "$tools_dir/node-v22.23.3"
-  tar -xzf "$node_archive" -C "$tools_dir/node-v22.23.3" --strip-components=1
-  ln -sfn "../node-v22.23.3/bin/node" "$tools_dir/bin/node"
-fi
-
 if [ ! -x "$tools_dir/llama-b11146/llama-server" ]; then
   llama_name="llama-b11146-bin-$llama_os-$llama_arch"
   llama_archive="$downloads_dir/$llama_name.tar.gz"
@@ -98,4 +83,4 @@ if [ ! -x "$tools_dir/llama-b11146/llama-server" ]; then
   fi
 fi
 
-echo "Local tools ready: Bun 1.4.0, Node 22.23.3, llama.cpp b11146."
+echo "Local tools ready: Bun 1.4.0 and llama.cpp b11146."

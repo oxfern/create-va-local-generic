@@ -7,11 +7,10 @@
     "setup": "bun scripts/setup.ts",
     "doctor": "bun scripts/doctor.ts",
     "typecheck": "bun scripts/check.ts",
-    "build:worker": "bun build server/speech-worker.ts --target=node --format=cjs --packages=external --outfile=.build/speech-worker.cjs",
     "build:web": "bun build web/app.ts --target=browser --outfile=.build/app.js",
-    "build": "bun run typecheck && bun run build:worker && bun run build:web",
-    "dev": "bun run build:worker && bun run build:web && bun server/server.ts",
-    "smoke": "bun run build:worker && bun run build:web && bun scripts/smoke.ts",
+    "build": "bun run typecheck && bun run build:web",
+    "dev": "bun run build:web && bun server/server.ts",
+    "smoke": "bun run build:web && bun scripts/smoke.ts",
     "test": "bun test test web"
   },
   "dependencies": {

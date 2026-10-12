@@ -11,8 +11,7 @@
  "speech": {
   "whisperPath": ".cache/models/whisper-small",
   "kokoroPath": ".cache/models/kokoro",
-  "nodeBinary": ".tools/bin/node",
-  "workerPath": ".build/speech-worker.cjs",
+  "workerPath": "server/speech-worker.ts",
   "voice": "af_heart"
  }
 }

@@ -3,7 +3,7 @@ import * as path from "node:path";
 import * as readline from "node:readline";
 import { env, pipeline, RawAudio, Tensor, type AutomaticSpeechRecognitionPipeline } from "@huggingface/transformers";
 import { KokoroTTS } from "kokoro-js";
-// This module is compiled to CJS and run only in Node, never inside Bun.
+// The speech worker runs in a separate Bun process so model work cannot block the server.
 env.allowRemoteModels = false;
 env.allowLocalModels = true;
 env.useBrowserCache = false;
