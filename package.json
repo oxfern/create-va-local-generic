@@ -1,0 +1,30 @@
+{
+  "name": "create-va-local-generic",
+  "version": "1.0.0",
+  "private": true,
+  "packageManager": "bun@1.4.0",
+  "scripts": {
+    "setup": "bun scripts/setup.ts",
+    "doctor": "bun scripts/doctor.ts",
+    "typecheck": "bun scripts/check.ts",
+    "build:worker": "bun build server/speech-worker.ts --target=node --format=cjs --packages=external --outfile=.build/speech-worker.cjs",
+    "build:web": "bun build web/app.ts --target=browser --outfile=.build/app.js",
+    "build": "bun run typecheck && bun run build:worker && bun run build:web",
+    "dev": "bun run build:worker && bun run build:web && bun server/server.ts",
+    "smoke": "bun run build:worker && bun run build:web && bun scripts/smoke.ts",
+    "test": "bun test test web"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "3.8.1",
+    "kokoro-js": "1.2.1",
+    "onnxruntime-node": "1.26.0"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.10",
+    "typescript": "5.9.3"
+  },
+  "overrides": {
+    "onnxruntime-node": "1.26.0"
+  },
+  "trustedDependencies": ["onnxruntime-node", "protobufjs", "sharp"]
+}

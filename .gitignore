@@ -1,0 +1,10 @@
+node_modules/
+.build/
+.cache/
+.tools/
+.hermit/
+bin/.hermit/
+config.local.json
+*.log
+.DS_Store
+**/Icon?

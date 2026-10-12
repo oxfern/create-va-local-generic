@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#101a24">
+  <title>Local voice</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main>
+    <header><a class="brand" href="/">◉ <span>Local voice</span></a><span class="badge">On your machine</span></header>
+    <section class="intro"><p class="eyebrow">YOUR LOCAL ASSISTANT</p><h1>A conversation,<br>at your pace.</h1><p>Speak naturally. Keep your audio and conversation on this computer.</p></section>
+    <section class="session" aria-label="Voice session">
+      <div class="session-head"><div><span id="status-dot" class="dot"></span><span id="status" role="status">Ready to connect</span></div><button id="reset" class="text-button" disabled>Clear conversation</button></div>
+      <div id="transcript" class="transcript" role="log" aria-live="polite" aria-relevant="additions text"><div id="empty" class="empty"><span class="wave">▂ ▅ ▇ ▅ ▂</span><h2>Your conversation starts here</h2><p>Connect your microphone, then hold the talk button.<br>The first reply may take longer while models load.</p></div></div>
+      <p id="notice" class="notice" role="status"></p>
+      <div class="controls"><button id="connect" class="connect">Connect microphone</button><button id="talk" class="talk" disabled>Hold to talk <span>SPACE</span></button><button id="stop" class="secondary" disabled>Stop reply</button><button id="mute" class="secondary" disabled aria-pressed="false">Mute mic</button></div>
+    </section>
+    <section class="preferences" aria-label="Microphone preferences"><label><input id="handsfree" type="checkbox"> Hands-free <span>Speak to send</span></label><label><input id="barge" type="checkbox" disabled> Interrupt by speaking</label><p id="mode-note">Push-to-talk gives you control. Hold Space or the talk button, then release to send.</p><p class="privacy">Use headphones for hands-free interruption. Echo cancellation is enabled; speakers can still trigger the microphone.</p></section>
+    <footer>Local speech recognition · Local language model · Local speech synthesis</footer>
+  </main>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
