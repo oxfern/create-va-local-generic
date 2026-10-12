@@ -4,8 +4,8 @@ set -eo pipefail
 cd "$(dirname "$0")"
 
 echo "Installing the local tools..."
-./bin/hermit install
-source ./bin/activate-hermit
+./scripts/install-tools.sh
+export PATH="$PWD/.tools/bin:$PATH"
 
 echo "Installing app dependencies..."
 bun install --frozen-lockfile

@@ -1,7 +1,7 @@
 {
  "server": { "port": 3000 },
  "llama": {
-  "binaryPath": "bin/llama-server",
+  "binaryPath": ".tools/llama-b11146/llama-server",
   "modelPath": ".cache/models/llm/model.gguf",
   "port": 8081,
   "contextSize": 4096,
@@ -11,7 +11,7 @@
  "speech": {
   "whisperPath": ".cache/models/whisper-small",
   "kokoroPath": ".cache/models/kokoro",
-  "nodeBinary": "bin/node",
+  "nodeBinary": ".tools/bin/node",
   "workerPath": ".build/speech-worker.cjs",
   "voice": "af_heart"
  }

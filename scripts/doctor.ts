@@ -1,4 +1,5 @@
 import { $ } from "bun";
+import { access, constants } from "node:fs/promises";
 import { loadConfig } from "../server/config";
 import { verifyModels } from "./model-store";
 
@@ -7,8 +8,7 @@ const config = await loadConfig(root);
 let failed = false;
 for (const [label, binary, argument] of [
   ["Node speech runtime", config.speech.nodeBinary, "--version"],
-  ["Bun application runtime", "./bin/bun", "--version"],
-  ["Local LLM runtime", config.llama.binaryPath, "--version"],
+  ["Bun application runtime", "./.tools/bin/bun", "--version"],
 ] as const) {
   try {
     const result = await $`${binary} ${argument}`.quiet().nothrow();
@@ -16,8 +16,15 @@ for (const [label, binary, argument] of [
     console.log(`${label}: ${result.text().trim() || result.stderr.toString().trim()}`);
   } catch {
     failed = true;
-    console.error(`${label}: unavailable. Run ./bin/hermit install to restore pinned tools.`);
+    console.error(`${label}: unavailable. Run ./scripts/install-tools.sh to restore pinned tools.`);
   }
+}
+try {
+  await access(config.llama.binaryPath, constants.X_OK);
+  console.log(`Local LLM runtime: ${config.llama.binaryPath}`);
+} catch {
+  failed = true;
+  console.error("Local LLM runtime: unavailable. Run ./scripts/install-tools.sh.");
 }
 const missing = await verifyModels(root);
 if (missing.length) {
